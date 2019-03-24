@@ -4,5 +4,7 @@
     <string name="nombreContact">Nombre</string>
     <string name="telefonoContact">Teléfono</string>
     <string name="CorreoContact">Correo</string>
+    <string name="EnviarEmail">Enviar Correo</string>
+    <string name="EnviarSMS">Enviar SMS</string>
 
 </resources>

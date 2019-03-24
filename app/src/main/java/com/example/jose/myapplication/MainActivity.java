@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private final int PICK_CONTACT_REQUEST = 1;
     private final int PERMISSIONS_REQUEST_READ_CONTACT = 100;
     private final int PERMISSIONS_REQUEST_CALL_PHONE = 101;
+    private final int PERMISSIONS_REQUEST_READ_SMS = 102;
+    private final int PERMISSIONS_REQUEST_RECIVE_SMS = 103;
     private Uri contactoUri;
 
     @Override
@@ -74,8 +76,31 @@ public class MainActivity extends AppCompatActivity {
                             String[]{Manifest.permission.CALL_PHONE},
                     PERMISSIONS_REQUEST_CALL_PHONE
             );
+        }
+
+
+        if(ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.RECEIVE_SMS)!=
+                PackageManager.PERMISSION_GRANTED){
+
+            requestPermissions(new
+                            String[]{Manifest.permission.RECEIVE_SMS},
+                    PERMISSIONS_REQUEST_RECIVE_SMS
+            );
 
         }
+
+        if(ContextCompat.checkSelfPermission(MainActivity.this,Manifest.permission.READ_SMS)!=
+                PackageManager.PERMISSION_GRANTED){
+
+            requestPermissions(new
+                            String[]{Manifest.permission.READ_SMS},
+                    PERMISSIONS_REQUEST_READ_SMS
+            );
+
+        }
+
+
+
 
 
         txtmensaje = (EditText)findViewById(R.id.txtMensaje);

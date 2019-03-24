@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:onClick="EnviarMensaje"
-        android:text="@string/botonSelec"
+        android:text="@string/EnviarSMS"
         android:layout_below="@+id/txtMensaje"/>
 
     <Button
@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:onClick="enviar_Email"
-        android:text="@string/botonSelec"
+        android:text="@string/EnviarEmail"
         android:layout_below="@+id/botonLlamar"/>
 
 
