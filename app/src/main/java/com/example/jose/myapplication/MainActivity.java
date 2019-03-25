@@ -357,11 +357,11 @@ public class MainActivity extends AppCompatActivity {
     protected void enviar_Email(View view) {
 
         try{
-           correo  = (TextView) findViewById(R.id.Correo);
-           if (correo.equals(null)){
+           correo  = (TextView)findViewById(R.id.Correo);
+           if (correo.toString().equals("")){
                Toast.makeText(MainActivity.this, "Campo de correo vacio",Toast.LENGTH_LONG).show();
            }else{
-
+              // Toast.makeText(MainActivity.this,correo.toString(),Toast.LENGTH_LONG).show();
                String mensaje = txtmensaje.getText().toString();
                String email = correo.getText().toString();
                String[] TO = {email}; //aquí pon tu correo

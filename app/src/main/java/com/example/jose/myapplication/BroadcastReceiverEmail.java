@@ -7,7 +7,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.BitmapFactory;
 import android.widget.Toast;
 
 public class BroadcastReceiverEmail extends BroadcastReceiver {
@@ -36,11 +35,11 @@ public class BroadcastReceiverEmail extends BroadcastReceiver {
         builder.setContentIntent(contentIntent)
                // .setSmallIcon(R.drawable.YOUR_APP_icon)
                 //.setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.YOUR_APP_icon))
-                .setTicker(res.getString(R.string.app_name))
+                .setTicker(res.getString(R.string.Proyecto))
                 .setWhen(System.currentTimeMillis())
                 .setAutoCancel(true)
-                .setContentTitle(res.getString(R.string.app_name))
-                .setContentText(res.getString(R.string.app_name));
+                .setContentTitle(res.getString(R.string.Proyecto))
+                .setContentText(res.getString(R.string.Proyecto));
         Notification n = builder.getNotification();
         nm.notify(1, n);
     }
