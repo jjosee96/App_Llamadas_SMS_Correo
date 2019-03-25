@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Intent;
+import android.content.RestrictionEntry;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -219,11 +220,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
-
     private String getTelefono(Uri uri) {
         String id = null;
         String telefono = null;
@@ -331,6 +327,7 @@ public class MainActivity extends AppCompatActivity {
             SmsManager sms = SmsManager.getDefault();
             sms.sendTextMessage(numeTelefono, null, mensaje, null,null);
             Toast.makeText(getApplicationContext(), "Mensaje Enviado.", Toast.LENGTH_LONG).show();
+            txtmensaje.getText().clear();
         }
 
         catch (Exception e){
@@ -342,39 +339,58 @@ public class MainActivity extends AppCompatActivity {
 
     public void llamar(View v){
         TextView telefono = (TextView) findViewById(R.id.telefonoContacto);
-        String numero = telefono.getText().toString();
-        Intent intent = new Intent(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:"+numero));
-        startActivity(intent);
+        try{
+
+            String numero = telefono.getText().toString();
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse("tel:"+numero));
+            startActivity(intent);
+
+        }catch (Exception e){
+            Toast.makeText(MainActivity.this,"Algo salio mal. Intentelo de nuevo",Toast.LENGTH_LONG).show();
+        }
+
 
     }
 
-
+    TextView correo;
     protected void enviar_Email(View view) {
-        TextView correo = (TextView) findViewById(R.id.Correo);
-        String mensaje = txtmensaje.getText().toString();
-        String email = correo.getText().toString();
-        String[] TO = {email}; //aquí pon tu correo
-        String[] CC = {""};
-        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        emailIntent.setData(Uri.parse("mailto:"));
-        emailIntent.setType("text/plain");
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+
+        try{
+           correo  = (TextView) findViewById(R.id.Correo);
+           if (correo.equals(null)){
+               Toast.makeText(MainActivity.this, "Campo de correo vacio",Toast.LENGTH_LONG).show();
+           }else{
+
+               String mensaje = txtmensaje.getText().toString();
+               String email = correo.getText().toString();
+               String[] TO = {email}; //aquí pon tu correo
+               String[] CC = {""};
+               Intent emailIntent = new Intent(Intent.ACTION_SEND);
+               emailIntent.setData(Uri.parse("mailto:"));
+               emailIntent.setType("text/plain");
+               emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+               emailIntent.putExtra(Intent.EXTRA_CC, CC);
 
 
-       /// emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Asunto");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, mensaje);
+               /// emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Asunto");
+               emailIntent.putExtra(Intent.EXTRA_TEXT, mensaje);
 
-        try {
-            startActivity(Intent.createChooser(emailIntent, "Enviar email..."));
-            finish();
-            Toast.makeText(MainActivity.this,"Email enviado", Toast.LENGTH_LONG).show();
+               try {
+                   startActivity(Intent.createChooser(emailIntent, "Enviar email..."));
+                   finish();
+                   txtmensaje.getText().clear();
+               } catch (android.content.ActivityNotFoundException ex) {
+                   Toast.makeText(MainActivity.this,
+                           "No tienes clientes de email instalados/Selecciona un contacto con email", Toast.LENGTH_SHORT).show();
+               }
 
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(MainActivity.this,
-                    "No tienes clientes de email instalados.", Toast.LENGTH_SHORT).show();
+           }
+        }catch (Exception e){
+
+
         }
+
     }
 
 }
